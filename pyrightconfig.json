@@ -1,0 +1,17 @@
+{
+  "include": [
+    "register_only.py",
+    "register_success.py"
+  ],
+  "exclude": [
+    "build",
+    "dist",
+    "node_modules",
+    "__pycache__"
+  ],
+  "pythonVersion": "3.11",
+  "typeCheckingMode": "basic",
+  "reportMissingImports": "none",
+  "reportMissingModuleSource": "none",
+  "reportMissingTypeStubs": "none"
+}

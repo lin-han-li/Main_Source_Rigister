@@ -1,0 +1,113 @@
+{
+  "name": "codex-register-main-source",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Stable native release orchestration for the Main_source desktop project",
+  "type": "module",
+  "author": {
+    "name": "pengjianzhong",
+    "email": "1526595636@qq.com"
+  },
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/lin-han-li/Main_Source_Rigister",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lin-han-li/Main_Source_Rigister.git"
+  },
+  "engines": {
+    "node": ">=20",
+    "python": ">=3.11"
+  },
+  "releaseMetadata": {
+    "publisher": "pengjianzhong",
+    "tagPrefix": "v",
+    "repositorySubdir": ".",
+    "linux": {
+      "maintainer": "pengjianzhong <1526595636@qq.com>"
+    }
+  },
+  "desktopRelease": {
+    "publisher": "pengjianzhong",
+    "publisherUrl": "https://github.com/lin-han-li/Main_Source_Rigister",
+    "vendor": "pengjianzhong",
+    "linux": {
+      "maintainer": "pengjianzhong <1526595636@qq.com>",
+      "section": "utils",
+      "priority": "optional",
+      "category": "Utility"
+    },
+    "macos": {
+      "signing": {
+        "identityEnv": "MACOS_SIGN_IDENTITY",
+        "notarizeAppleIdEnv": "MACOS_NOTARIZE_APPLE_ID",
+        "notarizeTeamIdEnv": "MACOS_NOTARIZE_TEAM_ID",
+        "notarizePasswordEnv": "MACOS_NOTARIZE_PASSWORD"
+      }
+    },
+    "apps": [
+      {
+        "id": "register-only",
+        "binaryName": "Register_Only",
+        "entry": "register_only.py",
+        "productName": "OpenAI Register Only",
+        "description": "Console-first Register build without Codex token retrieval.",
+        "runtimeDirName": "OpenAI Register Only",
+        "windows": {
+          "icon": "assets/register_only_icon.ico",
+          "installerScript": "register_only_installer.iss",
+          "outputBaseName": "Register_Only_Setup"
+        },
+        "linux": {
+          "packageName": "openai-register-only",
+          "commandName": "openai-register-only",
+          "desktopFileName": "openai-register-only.desktop",
+          "icon": "assets/register_only_icon.png"
+        },
+        "macos": {
+          "folderName": "OpenAI Register Only",
+          "launcherName": "Run OpenAI Register Only.command"
+        }
+      },
+      {
+        "id": "register-full",
+        "binaryName": "Register_Full",
+        "entry": "register_success.py",
+        "productName": "OpenAI Register Full",
+        "description": "Console-first Register build with Codex token retrieval.",
+        "runtimeDirName": "OpenAI Register Full",
+        "windows": {
+          "icon": "assets/register_full_icon.ico",
+          "installerScript": "register_full_installer.iss",
+          "outputBaseName": "Register_Full_Setup"
+        },
+        "linux": {
+          "packageName": "openai-register-full",
+          "commandName": "openai-register-full",
+          "desktopFileName": "openai-register-full.desktop",
+          "icon": "assets/register_full_icon.png"
+        },
+        "macos": {
+          "folderName": "OpenAI Register Full",
+          "launcherName": "Run OpenAI Register Full.command"
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "typecheck": "pyright",
+    "check:web-syntax": "node scripts/check-web-syntax.mjs",
+    "check:workflow": "node scripts/check-release-workflow.mjs",
+    "smoke:test": "node scripts/smoke-test.mjs",
+    "build:server": "node scripts/build-server-binary.mjs",
+    "build:helper": "node scripts/build-server-binary.mjs",
+    "verify:desktop": "node scripts/verify-desktop.mjs",
+    "dist:win": "node scripts/build-desktop.mjs --target win",
+    "dist:linux": "node scripts/build-desktop.mjs --target linux",
+    "dist:mac": "node scripts/build-desktop.mjs --target mac",
+    "release:cross-platform": "powershell -ExecutionPolicy Bypass -File scripts/release-cross-platform-dedicated.ps1"
+  },
+  "devDependencies": {
+    "pyright": "^1.1.402",
+    "yaml": "^2.8.1"
+  }
+}

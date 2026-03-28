@@ -1,0 +1,4 @@
+-r requirements-build.txt
+mypy>=1.11.2
+PyYAML>=6.0.2
+types-PyYAML>=6.0.12.20250915

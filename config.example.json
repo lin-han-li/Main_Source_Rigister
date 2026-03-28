@@ -1,0 +1,12 @@
+{
+  "project_repository": "https://github.com/lin-han-li/Main_Source_Rigister.git",
+  "proxy": "http://127.0.0.1:7897",
+  "enable_oauth": true,
+  "oauth_required": true,
+  "oauth_issuer": "https://auth.openai.com",
+  "oauth_client_id": "app_EMoamEEZ73f0CkXaXp7hrann",
+  "oauth_redirect_uri": "http://localhost:1455/auth/callback",
+  "ak_file": "ak.txt",
+  "rk_file": "rk.txt",
+  "token_json_dir": "codex_tokens"
+}

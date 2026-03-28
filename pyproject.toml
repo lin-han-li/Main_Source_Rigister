@@ -1,0 +1,64 @@
+[project]
+name = "main-source-register-suite"
+version = "1.0.0"
+description = "Cross-platform desktop packaging metadata for Main_source."
+requires-python = ">=3.11"
+authors = [
+  { name = "pengjianzhong", email = "1526595636@qq.com" },
+]
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_configs = true
+check_untyped_defs = true
+no_implicit_optional = true
+exclude = "(^build/|^out/|^accounts/|^codex_tokens/|^__pycache__/)"
+files = ["app_runtime.py", "scripts"]
+
+[tool.codex_release]
+tag_prefix = "v"
+product_name = "OpenAI Register"
+publisher = "pengjianzhong"
+repository_url = "https://github.com/lin-han-li/Main_Source_Rigister.git"
+linux_maintainer = "pengjianzhong <1526595636@qq.com>"
+bundle_files = ["README.md", "config.example.json"]
+release_guard = [
+  "app_runtime.py",
+  "build_source_exes.bat",
+  "build_source_installers.bat",
+  "config.example.json",
+  "pyproject.toml",
+  "register_only.py",
+  "register_only.spec",
+  "register_only_installer.iss",
+  "register_success.py",
+  "register_success.spec",
+  "register_full_installer.iss",
+  "requirements-build.txt",
+  "requirements-dev.txt",
+  "README.md",
+  "scripts",
+  ".github/workflows/build-desktop.yml",
+]
+
+[[tool.codex_release.apps]]
+id = "register-only"
+display_name = "OpenAI Register Only"
+binary_name = "Register_Only"
+package_name = "openai-register-only"
+entry_script = "register_only.py"
+spec_file = "register_only.spec"
+windows_installer_script = "register_only_installer.iss"
+windows_launcher = "run_register_only.bat"
+state_dir_name = "OpenAI Register Only"
+
+[[tool.codex_release.apps]]
+id = "register-full"
+display_name = "OpenAI Register Full"
+binary_name = "Register_Full"
+package_name = "openai-register-full"
+entry_script = "register_success.py"
+spec_file = "register_success.spec"
+windows_installer_script = "register_full_installer.iss"
+windows_launcher = "run_register_full.bat"
+state_dir_name = "OpenAI Register Full"
