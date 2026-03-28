@@ -27,6 +27,10 @@ function yamlQuote(value) {
   return JSON.stringify(String(value));
 }
 
+function yamlNumber(value) {
+  return String(Number(value));
+}
+
 function createLinuxLauncher(app) {
   return `#!/usr/bin/env bash
 set -euo pipefail
@@ -175,19 +179,19 @@ async function packageLinux(config, buildResult) {
       `  - src: ${yamlQuote(binaryTarget)}`,
       `    dst: ${yamlQuote(`/opt/${app.linux.packageName}/bundle/${binaryFileName(app, "linux")}`)}`,
       "    file_info:",
-      `      mode: ${yamlQuote("0755")}`,
+      `      mode: ${yamlNumber(0o755)}`,
       `  - src: ${yamlQuote(iconTarget)}`,
       `    dst: ${yamlQuote(`/opt/${app.linux.packageName}/resources/${path.basename(app.linux.icon)}`)}`,
       "    file_info:",
-      `      mode: ${yamlQuote("0644")}`,
+      `      mode: ${yamlNumber(0o644)}`,
       `  - src: ${yamlQuote(launcherPath)}`,
       `    dst: ${yamlQuote(`/usr/bin/${app.linux.commandName}`)}`,
       "    file_info:",
-      `      mode: ${yamlQuote("0755")}`,
+      `      mode: ${yamlNumber(0o755)}`,
       `  - src: ${yamlQuote(desktopFilePath)}`,
       `    dst: ${yamlQuote(`/usr/share/applications/${app.linux.desktopFileName}`)}`,
       "    file_info:",
-      `      mode: ${yamlQuote("0644")}`,
+      `      mode: ${yamlNumber(0o644)}`,
       "",
     ].join("\n");
 

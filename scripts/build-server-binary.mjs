@@ -91,6 +91,7 @@ export async function buildBinaries(options = {}) {
       env: {
         PYTHONUTF8: "1",
         PYTHONIOENCODING: "utf-8",
+        CODEX_REGISTER_NO_PAUSE: "1",
         OPENAI_REGISTER_RUNTIME_DIR: path.join(ROOT_DIR, "build", "smoke-runtime", app.id, target),
       },
     });
