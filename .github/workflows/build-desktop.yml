@@ -47,8 +47,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y rpm
           curl -fsSL https://github.com/goreleaser/nfpm/releases/download/v2.40.1/nfpm_2.40.1_Linux_x86_64.tar.gz -o /tmp/nfpm.tar.gz
-          tar -xzf /tmp/nfpm.tar.gz -C /tmp nfpm
-          sudo install /tmp/nfpm /usr/local/bin/nfpm
+          mkdir -p /tmp/nfpm-extract
+          tar -xzf /tmp/nfpm.tar.gz -C /tmp/nfpm-extract
+          chmod +x /tmp/nfpm-extract/nfpm
+          sudo install /tmp/nfpm-extract/nfpm /usr/local/bin/nfpm
 
       - name: Install Inno Setup
         if: matrix.target == 'win'
