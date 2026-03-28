@@ -46,11 +46,30 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y rpm
-          curl -fsSL https://github.com/goreleaser/nfpm/releases/download/v2.40.1/nfpm_2.40.1_Linux_x86_64.tar.gz -o /tmp/nfpm.tar.gz
-          mkdir -p /tmp/nfpm-extract
-          tar -xzf /tmp/nfpm.tar.gz -C /tmp/nfpm-extract
-          chmod +x /tmp/nfpm-extract/nfpm
-          sudo install /tmp/nfpm-extract/nfpm /usr/local/bin/nfpm
+          NFP_URL="$(python - <<'PY'
+          import json
+          import urllib.request
+
+          request = urllib.request.Request(
+              "https://api.github.com/repos/goreleaser/nfpm/releases/latest",
+              headers={
+                  "Accept": "application/vnd.github+json",
+                  "User-Agent": "main-source-rigister-release",
+              },
+          )
+          with urllib.request.urlopen(request) as response:
+              release = json.load(response)
+
+          asset = next(
+              candidate
+              for candidate in release["assets"]
+              if candidate["name"].endswith("_amd64.deb")
+          )
+          print(asset["browser_download_url"])
+          PY
+          )"
+          curl -fsSL "$NFP_URL" -o /tmp/nfpm.deb
+          sudo dpkg -i /tmp/nfpm.deb
 
       - name: Install Inno Setup
         if: matrix.target == 'win'
